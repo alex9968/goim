@@ -8,11 +8,13 @@ ENV APP_NAME goim
 
 COPY . /app
 WORKDIR /app
-RUN go build -o  comet cmd/comet/main.go
-RUN go build -o  logic cmd/logic/main.go
-RUN go build -o  job cmd/job/main.go
+RUN go build -o  comet cmd/comet/main.go && \
+    go build -o  logic cmd/logic/main.go  && \
+    go build -o  job cmd/job/main.go
 
-COPY configs/* .
+#COPY cmd/comet/comet-example.toml .
+#COPY cmd/job/job-example.toml .
+#COPY cmd/logic/logic-example.toml .
 
 EXPOSE 8000
 CMD ["/bin/sh"]

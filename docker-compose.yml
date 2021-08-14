@@ -18,6 +18,9 @@ services:
       - kafka
       - discovery
     entrypoint: /app/comet
+    volumes:
+      - ./cmd/comet/comet-example.toml:/app/comet-example.toml
+
 
   logic:
     build:
@@ -35,6 +38,9 @@ services:
       - kafka
       - discovery
     entrypoint: /app/logic
+    volumes:
+      - ./cmd/logic/logic-example.toml:/app/logic-example.toml
+
 
   job:
     build:
@@ -49,12 +55,16 @@ services:
       - kafka
       - discovery
     entrypoint: /app/job
+    volumes:
+      - ./cmd/job/job-example.toml:/app/job-example.toml
 
   discovery:
     image: discovery
     restart: always
     ports:
       - "7171:7171"
+    volumes:
+      - ./cmd/discovery.toml:/app/conf/discovery.toml
 
   redis:
     image: redis
